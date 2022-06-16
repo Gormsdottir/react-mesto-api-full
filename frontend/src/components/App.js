@@ -217,13 +217,13 @@ function App() {
               onCardDelete={handleCardDelete}
             />
 
-            <Route path="/signin">
+            <Route path="/sign-in">
               <Register
                 onSubmit={handleRegistration}
                 isInfoTooltipOpen={isInfoTooltipOpen}
               />
             </Route>
-            <Route path="/signup">
+            <Route path="/sign-up">
               <Login
                 onSubmit={handleLogin} />
             </Route>

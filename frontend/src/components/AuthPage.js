@@ -12,7 +12,7 @@ function AuthPage({name, onSubmit, title, children, button }) {
         </button>
 
         {name === "register" && (
-          <Link className="authpage__link" to="/signup">
+          <Link className="authpage__link" to="/sign-up">
             Уже зарегистрированы? Войти
           </Link>
         )}
