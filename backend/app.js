@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: 'https://http://gormsdottir.domain.nomoredomains.xyz/',
+    origin: 'https://gormsdottir.domain.nomoredomains.xyz',
     credentials: true,
   }),
 );
