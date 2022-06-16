@@ -1,0 +1,12 @@
+.card {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    background: #FFFFFF;
+    border-radius: 10px;
+    grid-template-columns: 1fr 62px;
+    grid-template-rows: 1fr 79px;
+    justify-items: center;
+    align-items: center;
+}

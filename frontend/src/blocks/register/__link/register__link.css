@@ -1,0 +1,14 @@
+.register__link {
+    font-size: 18px;
+    color: white;
+    height: 17px;
+    align-self: center;
+    text-decoration: none;
+    background-color: transparent;
+    transition: opacity 3s;
+}
+
+.register__link:hover {
+    opacity: 0.7;
+    cursor: pointer;
+}

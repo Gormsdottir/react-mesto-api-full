@@ -1,0 +1,26 @@
+.profile {
+    margin: 0 auto;
+    padding: 40px 0 51px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 140px auto max-content 1fr max-content;
+    grid-template-areas:
+        "image name edit . add"
+        "image occupation . . add";
+    column-gap: 10px;
+}
+
+@media all and (max-width: 767px) {
+    .profile {
+        margin: auto;
+        max-width: 282px;
+        padding: 42px 0 36px;
+        grid-template-columns: 235px auto;
+        grid-template-areas:
+            "image image"
+            "name edit"
+            "occupation occupation"
+            "add add";
+        gap: 5px;
+    }
+}

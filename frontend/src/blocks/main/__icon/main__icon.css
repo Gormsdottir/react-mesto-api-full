@@ -1,0 +1,12 @@
+.main__icon {
+    margin: auto;
+    display: block;
+    object-fit: contain;
+    object-position: center;
+}
+
+@media all and (max-width: 767px) {
+    .main__icon {
+        height: 35%;
+    }
+}
