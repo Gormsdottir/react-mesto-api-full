@@ -7,7 +7,7 @@ import AddCardPopup from './AddCardPopup';
 import ImagePopup from './ImagePopup';
 import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
-import api from '../utils/api';
+import { api } from '../utils/api';
 import { Switch, Route, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
@@ -135,7 +135,7 @@ function App() {
   }
 
   function tokenCheck() {
-    const jwt = localStorage.getItem("token");
+    const jwt = localStorage.getItem("jwt");
 
     if (jwt) {
       auth
@@ -217,13 +217,13 @@ function App() {
               onCardDelete={handleCardDelete}
             />
 
-            <Route path="/sign-in">
+            <Route path="/signin">
               <Register
                 onSubmit={handleRegistration}
                 isInfoTooltipOpen={isInfoTooltipOpen}
               />
             </Route>
-            <Route path="/sign-up">
+            <Route path="/signup">
               <Login
                 onSubmit={handleLogin} />
             </Route>

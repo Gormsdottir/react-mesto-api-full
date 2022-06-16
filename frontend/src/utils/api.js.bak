@@ -97,7 +97,7 @@ class Api {
 }
 
 export const api = new Api({
-  url: 'https://api.gormsdottir.domain.nomoredomains.xyz',
+  url: 'http://api.gormsdottir.domain.nomoredomains.xyz',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
