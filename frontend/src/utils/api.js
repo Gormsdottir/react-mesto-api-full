@@ -1,94 +1,72 @@
 class Api {
-  constructor(options) {
-    this._url = options.url;
-    this._headers = options.headers;
+  constructor({ baseUrl, headers }) {
+    this._baseUrl = baseUrl;
+    this._headers = headers;
+  }
+
+  getUserInfo(token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then(this._checkResponse);
+  }
+
+  getOwnerCards(token) {
+    return fetch(`${this._baseUrl}/cards`, {
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then(this._checkResponse);
+  }
+
+  setUserInfoApi(name, about, token) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        name,
+        about,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  handleUserAvatar(avatar, token) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        avatar,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  addUserCard(name, link, token) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: 'POST',
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+      body: JSON.stringify({
+        name,
+        link,
+      }),
+    }).then(this._checkResponse);
+  }
+
+  changeLikeCardStatus(id, token, isLiked) {
+    return fetch(`${this._baseUrl}/cards/${id}/likes`, {
+      method: isLiked ? 'PUT' : 'DELETE',
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then(this._checkResponse);
+  }
+
+  delete(id, token) {
+    return fetch(`${this._baseUrl}/cards/${id}`, {
+      method: 'DELETE',
+      headers: { ...this._headers, Authorization: `Bearer ${token}` },
+    }).then(this._checkResponse);
   }
 
   _checkResponse(res) {
     if (res.ok) {
-      return res.json()
+      return res.json();
     }
-    return Promise.reject(`Ошибка: ${res.status}`)
-  }
-
-  getUserInfo() {
-    return fetch(`${this._url}/users/me`, {
-      method: 'GET',
-      headers: this._headers,
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
-  }
-
-  setUserInfoApi(userInfo) {
-    return fetch(`${this._url}/users/me`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: userInfo.name,
-        about: userInfo.about
-      })
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
-
-  }
-
-  handleUserAvatar(data) {
-    return fetch(`${this._url}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: this._headers,
-      body: JSON.stringify({
-        avatar: data.avatar,
-      })
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
-  }
-
-  getOwnerCards() {
-    return fetch(`${this._url}/cards`, {
-      method: 'GET',
-      headers: this._headers
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
-  }
-
-  addUserCard(data) {
-    return fetch(`${this._url}/cards`, {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link
-      })
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
-  }
-
-  changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._url}/cards/likes/${cardId}`, {
-      method: isLiked ? 'PUT' : 'DELETE',
-      headers: this._headers
-    })
-      .then(this._checkResponse);
-  }
-
-  delete(dataId) {
-    return fetch(`${this._url}/cards/${dataId}`, {
-      method: 'DELETE',
-      headers: this._headers
-    })
-      .then((res) => {
-        return this._checkResponse(res)
-      });
+    return Promise.reject(`Что-то пошло не так: ${res.status}`);
   }
 
   getAllData() {
@@ -96,11 +74,12 @@ class Api {
   }
 }
 
-export const api = new Api({
-  url: 'https://api.gormsdottir.domain.nomoredomains.xyz',
+const api = new Api({
+  baseUrl: 'http://api.gormsdottir.domain.nomoredomains.xyz/',
   headers: {
-    authorization: 'cde4f620-2d00-4326-89fd-80ea2c0d07b4',
-    'Content-Type': 'application/json'
-  }
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
 });
 
+export default api;

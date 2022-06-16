@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: 'https://gormsdottir.domain.nomoredomains.xyz',
+    origin: 'https://http://gormsdottir.domain.nomoredomains.xyz/',
     credentials: true,
   }),
 );
@@ -30,7 +30,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {
-    trrow new Error('Сервер сейчас упадёт');
+    throw new Error('Сервер сейчас упадёт');
   }, 0);
 });
 

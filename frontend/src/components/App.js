@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from './Header';
 import Main from './Main';
 import EditProfilePopup from './EditProfilePopup';
@@ -6,8 +7,8 @@ import AddCardPopup from './AddCardPopup';
 import ImagePopup from './ImagePopup';
 import { useState, useEffect } from 'react';
 import { CurrentUserContext } from '../context/CurrentUserContext';
-import { api } from '../utils/api';
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom';
+import api from '../utils/api';
+import { Switch, Route, useHistory } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Login from './Login';
 import Register from './Register';
@@ -134,7 +135,7 @@ function App() {
   }
 
   function tokenCheck() {
-    const jwt = localStorage.getItem("jwt");
+    const jwt = localStorage.getItem("token");
 
     if (jwt) {
       auth
